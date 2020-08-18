@@ -3,26 +3,15 @@ package com.canalogies.aop;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
+@Order(2)
 @Aspect
 @Component
+
 public class MyDemoLoggingAspect {
 
-	@Pointcut("execution(* com.canalogies.aop.*.*(..))")
-	public void getAllPoint() {}
 	
-	//getter pointcut
-	@Pointcut("execution(* com.canalogies.aop.*.get*(..))")
-	public void getterPoint() {}
-	
-	//setter pointcut
-	@Pointcut("execution(* com.canalogies.aop.*.set*(..))")
-	public void setterPoint() {}
-	
-	//combine getter and setter
-	@Pointcut("getAllPoint() && !(getterPoint()||setterPoint())")
-	public void getAllButNotGetorSetPoint() {}
 	
 	//logging aspect
 	//call before aspect
@@ -34,13 +23,10 @@ public class MyDemoLoggingAspect {
 	//@Before("execution(* add*(..))")
 	//@Before("getAllPoint()")
 	
-	@Before("getAllButNotGetorSetPoint()")
+	@Before("com.canalogies.aop.aspects.MyPointcutAspects.getAllButNotGetorSetPoint()")
 	public void beforeAddAccountAdvice() {
-		System.out.println("=========> called before Add account");
+		System.out.println("=========> called before as log aspect account");
 	}
 	
-	@Before("getAllButNotGetorSetPoint()")
-	public void beforeAddAccountAdvice1() {
-		System.out.println("=========> called before Add account1");
-	}
+	
 }
