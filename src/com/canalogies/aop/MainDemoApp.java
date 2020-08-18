@@ -10,6 +10,11 @@ public class MainDemoApp {
 		AccountDAO accountDAO=context.getBean("accountDAO",AccountDAO.class);
 		
 		accountDAO.addAccount(new Account(),true);
+		accountDAO.setName("hello");
+		accountDAO.setServiceCode("ca");
+		
+		accountDAO.getName();
+		accountDAO.getServiceCode();
 		
 		MemberShipDAO mambershipDAO=context.getBean("memberShipDAO",MemberShipDAO.class);
 		
