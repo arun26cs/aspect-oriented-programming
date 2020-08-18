@@ -1,8 +1,10 @@
 package com.canalogies.aop;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 @Order(2)
@@ -24,8 +26,11 @@ public class MyDemoLoggingAspect {
 	//@Before("getAllPoint()")
 	
 	@Before("com.canalogies.aop.aspects.MyPointcutAspects.getAllButNotGetorSetPoint()")
-	public void beforeAddAccountAdvice() {
+	public void beforeAddAccountAdvice(JoinPoint theJoinPoint) {
 		System.out.println("=========> called before as log aspect account");
+		MethodSignature theMethoSignature = (MethodSignature) theJoinPoint.getSignature();
+		System.out.println(theMethoSignature+" "+theMethoSignature);
+		
 	}
 	
 	
